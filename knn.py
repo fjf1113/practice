@@ -12,29 +12,19 @@ def knn(X_train, X_test, y_train, k):
         distances = [euclidean_distance(x_train, x_test) for x_train in X_train]
         index = np.argsort(distances)[:k]  #将distances中的值从小到大以索引排序，取出前k个
         labels =[y_train[i] for i in index]  #将索引转为值存到列表
-        set_labels = list(set(labels))  #按标签排序
-        myset = set(set_labels)
-        counts = []
-        for i in myset:
-            count = set_labels.count(i)
-            counts.append(count)
-        f_label = max(counts)
+        f_label = max(set(labels), key=labels.count)  #按照labels中的值出现的次数取最大值
         y_pred.append(f_label)
     return np.array(y_pred)
 
 
 #test
-
-# 设置随机数种子
-np.random.seed(2021)
-
-# 生成100个随机坐标
 n = 100
-X = np.random.randint(-100, 100, size=(100, 2))
+X = np.random.randint(-100, 100, size=(n, 2))
 # 随机赋予每个数据点一个类别标签（0或1）
-y = np.random.randint(0, 5, n)
+y = np.random.randint(0, 3, n)
+
 from sklearn.model_selection import train_test_split
 X_train, X_test, y_train, y_test = train_test_split(X, y, train_size=0.7, random_state=42)
 
-result = knn(X_train, X_test, y_train, 5)
+result = knn(X_train, X_test, y_train, 10)
 print(result)
