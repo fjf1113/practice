@@ -37,7 +37,7 @@ def bpnn(x, y, hidden_layer, iters, alpha):
 
         cost = np.sum((z3 - y)**2) / (2*x.shape[0])
 
-
+        
         if cost < 0.0001:
             break
         else:
