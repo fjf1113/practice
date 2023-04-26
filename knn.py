@@ -19,11 +19,12 @@ def knn(X_train, X_test, y_train, k):
 
 #test
 n = 100
-X = np.random.rand(-100, 100, size=(n, 2))
+X = np.random.randint(-100, 100, size=(n, 2))
+# 随机赋予每个数据点一个类别标签（0或1）
 y = np.random.randint(0, 3, n)
 
 from sklearn.model_selection import train_test_split
 X_train, X_test, y_train, y_test = train_test_split(X, y, train_size=0.7, random_state=42)
 
-result = knn(X_train, X_test, y_train, 5)
+result = knn(X_train, X_test, y_train, 10)
 print(result)
